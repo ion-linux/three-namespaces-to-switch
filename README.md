@@ -1,6 +1,6 @@
 # Three namespaces attached to a switch (Linux bridge)
 <br>
-CONNECT marketing, legal, sales
+CONNECT marketing, legal, sales namespaces
 <br>
 <br>
 <br>
