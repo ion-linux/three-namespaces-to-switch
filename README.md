@@ -10,7 +10,7 @@ It will bridge namespaces.
 
 Create a switch where you will plug the cabels in
 ```
-ip link add SWITCH type bridge
+ip link add SWITCH0 type bridge
 ```
 
 Check the switch created, look for the name SWITCH
@@ -20,12 +20,12 @@ ip link
 
 Create a L3 interface on the switch
 ```
-ip addr add 192.168.1.1/24 dev SWITCH
+ip addr add 192.168.1.1/24 dev SWITCH0
 ```
 
 Power on the switch
 ```
-ip link set dev SWITCH up
+ip link set dev SWITCH0 up
 ```
 
 Route traffic to the internet
@@ -49,7 +49,7 @@ ip netns add marketing
 
 Create a cable
 ```
-ip link add eth0-marketing peer name eth0-marketing-to-SWITCH
+ip link add eth0-marketing peer name eth0-marketing-to-SWITCH0
 ```
 
 Attach one end to the marketing namespace
@@ -59,7 +59,7 @@ ip link set eth0-marketing netns
 
 Attach the other end to the SWITCH notice the master keyword
 ```
-ip link set eth0-marketing-to-SWITCH master SWITCH
+ip link set eth0-marketing-to-SWITCH0 master SWITCH0
 ```
 
 Configure L3 address on the interface (end of cable) attached to the namespace:
@@ -88,7 +88,7 @@ ip netns add legal
 
 Create a cable
 ```
-ip link add eth0-legal peer name-eth0-legal-to-SWITCH
+ip link add eth0-legal peer name-eth0-legal-to-SWITCH0
 ```
 
 Attach one end to legal namespace
@@ -98,7 +98,7 @@ ip link set eth0-legal netns
 
 Attach the other end to the SWITCH, notice the master keyword
 ```
-ip link set eth0-legal-to-SWITCH master SWITCH
+ip link set eth0-legal-to-SWITCH0 master SWITCH0
 ```
 
 Configure L3 address on the interface (end of cable) attached to the namespace:
@@ -111,7 +111,7 @@ Brig up the interface on the namespace
 ip -n legal link set eth0-legal up
 ```
 
-Route traffic to 192.168.1.0/24 through the SWITCH L3 interface
+Route traffic to 192.168.1.0/24 through the SWITCH0 L3 interface
 ```
 ip netns exec legal ip route add default via 192.168.1.1
 ```
@@ -126,7 +126,7 @@ ip netns add sales
 
 Create a cable
 ```
-ip link add eth0-sales peer name-eth0-sales-to-SWITCH
+ip link add eth0-sales peer name-eth0-sales-to-SWITCH0
 ```
 
 Attach one end to legal namespace
@@ -134,9 +134,9 @@ Attach one end to legal namespace
 ip link set eth0-sales netns
 ```
 
-Attach the other end to the SWITCH, notice the master keyword
+Attach the other end to the SWITCH0, notice the master keyword
 ```
-ip link set eth0-sales-to-SWITCH master SWITCH
+ip link set eth0-sales-to-SWITCH0 master SWITCH0
 ```
 
 Configure L3 address on the interface (end of cable) attached to the namespace:
