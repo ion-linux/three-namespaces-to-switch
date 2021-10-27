@@ -6,7 +6,7 @@ CONNECT marketing, legal, sales namespaces
 <br>
 
 # Create a switch
-bridges namespaces
+It will bridges namespaces
 
 Create a switch where you will plug the cabels in
 ```
