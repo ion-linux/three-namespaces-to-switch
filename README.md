@@ -1,6 +1,6 @@
 # Three namespaces attached to a switch (Linux bridge)
 <br>
-CONNECT marketing, legal, sales namespaces
+CONNECT marketing, legal and sales namespaces
 <br>
 <br>
 <br>
@@ -49,25 +49,25 @@ ip netns add marketing
 
 Create a cable
 ```
-ip link add eth0-marketing peer name eth0-marketing-to-SWITCH0
+ip link add eth0-marketing peer name eth0-marketingSW
 ```
 
 Attach one end to the marketing namespace
 ```
-ip link set eth0-marketing netns
+ip link set eth0-marketing netns marketing
 ```
 
 Attach the other end to the SWITCH notice the master keyword
 ```
-ip link set eth0-marketing-to-SWITCH0 master SWITCH0
+ip link set eth0-marketingSW master SWITCH0
 ```
 
 Configure L3 address on the interface (end of cable) attached to the namespace:
 ```
-ip -n marketing address add 192.168.1.101 dev eth0-marketing
+ip -n marketing address add 192.168.1.101/24 dev eth0-marketing
 ```
 
-Brig up the interface on the namespace
+Bring up the interface on the namespace
 ```
 ip -n marketing link set eth0-marketing up
 ```
@@ -103,10 +103,10 @@ ip link set eth0-legal-to-SWITCH0 master SWITCH0
 
 Configure L3 address on the interface (end of cable) attached to the namespace:
 ```
-ip -n legal address add 192.168.1.102 dev eth0-legal
+ip -n legal address add 192.168.1.102/24 dev eth0-legal
 ```
 
-Brig up the interface on the namespace
+Bring up the interface on the namespace
 ```
 ip -n legal link set eth0-legal up
 ```
@@ -144,7 +144,7 @@ Configure L3 address on the interface (end of cable) attached to the namespace:
 ip -n sales address add 192.168.1.103 dev eth0-sales
 ```
 
-Brig up the interface on the namespace
+Bring up the interface on the namespace
 ```
 ip -n sales link set eth0-sales up
 ```
